@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="Produto_30.mod_30_db::cv_produtos" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="cv_produtos"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="Produto_30.mod_30_db::dados.Produtos">
+    <resourceUri>Produto_30.mod_30_db::dados.Produtos</resourceUri>
+  </DataSource>
+  <DataSource id="Produto_30.mod_30_db::dados.Categorias">
+    <resourceUri>Produto_30.mod_30_db::dados.Categorias</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="id">
+        <descriptions defaultDescription="id"/>
+      </viewAttribute>
+      <viewAttribute id="nomeProduto">
+        <descriptions defaultDescription="nome"/>
+      </viewAttribute>
+      <viewAttribute id="categoria">
+        <descriptions defaultDescription="nome_1"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$to_categoria.id$id"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="nome_upper" datatype="NVARCHAR" length="20" expressionLanguage="SQL">
+        <formula>upper(&quot;nomeProduto&quot;)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+    <input node="Produto_30.mod_30_db::dados.Produtos">
+      <mapping xsi:type="Calculation:AttributeMapping" target="id" source="id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="nomeProduto" source="nome"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$to_categoria.id$id" source="to_categoria.id"/>
+    </input>
+    <input node="Produto_30.mod_30_db::dados.Categorias">
+      <mapping xsi:type="Calculation:AttributeMapping" target="categoria" source="nome"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$to_categoria.id$id" source="id"/>
+    </input>
+    <joinAttribute name="JOIN$to_categoria.id$id"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="id" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="id"/>
+      <keyMapping columnObjectName="Join_1" columnName="id"/>
+    </attribute>
+    <attribute id="nome_upper" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="nome_upper"/>
+      <keyMapping columnObjectName="Join_1" columnName="nome_upper"/>
+    </attribute>
+    <attribute id="categoria" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="nome_1"/>
+      <keyMapping columnObjectName="Join_1" columnName="categoria"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="88" y="265"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Produto_30.mod_30_db::dados.Produtos" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Produto_30.mod_30_db::dados.Categorias" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

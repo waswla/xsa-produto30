@@ -1,0 +1,24 @@
+namespace Produto_30.mod_30_db;
+
+context dados {
+
+    /*@@layout{"layoutInfo":{"x":-125,"y":-19.5}}*/
+    entity Categorias {
+        key id   : Integer;
+            nome : String(10);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-375,"y":64.5}}*/
+    entity Produtos {
+        key id           : Integer;
+            nome         : String(10);
+            to_categoria : association[1..1] to dados.Categorias;
+    };
+
+    /*@@layout{"layoutInfo":{"x":-859,"y":-173.5}}*/
+    type ty_admin {
+        criado_por : String(30);
+        criado_em  : LocalDate;
+        criado_as  : LocalTime;
+    };
+};

@@ -1,0 +1,27 @@
+ID: produto_30
+_schema-version: '2.0'
+version: 0.0.1
+modules:
+  - name: mod_30_web
+    type: html5
+    path: mod_30_web
+    parameters:
+      app-name: modulo_30_web
+      memory: 32M
+      disk-quota: 32M
+
+  - name: mod_30_db
+    type: hdb
+    path: mod_30_db
+    requires:
+     - name: hdi_mod_30_db
+
+
+resources:
+ - name: hdi_mod_30_db
+   parameters:
+      config:
+         schema: PRODUTO_30
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
